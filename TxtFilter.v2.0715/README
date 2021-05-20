@@ -1,0 +1,19 @@
+﻿1.文件说明
+termList.dat	特征数据文件，用于训练和分类使用
+model9.v2.dat	由txtFilterTrain训练得到的模型数据文件,必须与termList.dat配对使用, 同之前的model1~4.dat格式不同，这版不能使用。
+TxtFilter\	文本分类库，编译生成静态库libTxtFilter.a，使用时需包含TxtFilter\include\TxtFilter.h并且链接libTxtFilter.a
+TxtFilterTest\	示例程序，调用TxtFilter对某个目录的所有文件进行分类
+TxtFilterTrain\	示例程序，调用TxtFilter对给定样本进行训练得到模型数据文件
+
+2.TxtFilter调用方法
+参见TxtFilter\include\TxtFilter.h与TxtFilterTest.cpp
+
+3.TxtFilterTest使用方法
+./TxtFilterTest termList.dat model4.dat samplesFolder/
+(其中samplesFolder是要处理的目录，其中所有文件都会被当作文本进行分类，不处理子目录)
+输出结果每行的格式是“文件名，得分”，得分在0到100之间，得分越高目标越与正样本相似
+
+4.TxtFilterTrain使用方法
+./TxtFilterTrain termList.dat modelx.dat samples1/ samples2/
+(其中samples1目录存放正样本，samples2存放负样本，modelx.dat是训练得到的模型数据文件)
+
