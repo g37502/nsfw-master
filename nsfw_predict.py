@@ -109,10 +109,10 @@ if __name__ == '__main__':
             elif check_list[1] == 'text':
                 s = rehis_zero.hget(check_key,key)
                 # rehis_zero_pic.hdel(check_key,key)
-
                 try:
                     file_title=s[0:2048]
                     file_type=magic.from_buffer(file_title)
+                    print(file_type)
                     if 'text' in file_type:
                         print('这个是text:', file_type)
                         print(type(s))
@@ -136,15 +136,17 @@ if __name__ == '__main__':
                         score = int(score)
                         if score > 10:
                             rehis_zero.hset('porn', key, s)
-
                         else:
                             rehis_zero.hset('normal', key, s)
                         rehis_zero.hdel(check_key, key)
                     else:
                         print('未知类型',key)
+                        rehis_zero.hdel(check_key, key)
                 except Exception as e:
                     print('未知原因',e)
             elif check_list[1] == 'video':
-                pass
+                print('删除视频文件:',key)
+                rehis_zero.hdel(check_key, key)
+
             else:
-                pass
+                rehis_zero.hdel(check_key, key)
