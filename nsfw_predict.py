@@ -139,6 +139,18 @@ if __name__ == '__main__':
                         else:
                             rehis_zero.hset('normal', key, s)
                         rehis_zero.hdel(check_key, key)
+                    elif 'at least v1.0 to extract' in file_type:
+                        with open(f'tmp/{check_list[2]}', 'wb') as f:
+                            f.write(s)
+                        score = check_file(file=f'tmp/{check_list[2]}')
+                        print(score, type(score))
+                        score = int(score)
+                        if score > 10:
+                            rehis_zero.hset('porn', key, s)
+                        else:
+                            rehis_zero.hset('normal', key, s)
+                        rehis_zero.hdel(check_key, key)
+
                     else:
                         print('未知类型',key)
                         rehis_zero.hdel(check_key, key)
